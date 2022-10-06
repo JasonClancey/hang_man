@@ -1,1 +1,1 @@
-# hang_man
+This is The Odin Project's Hang Man assignment
