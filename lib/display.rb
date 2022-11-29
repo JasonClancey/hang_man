@@ -12,4 +12,16 @@ module Display
         puts "Invalid entry. Please retry."
     end
 
+    def display_gallows
+        puts <<~HEREDOC
+        +---+
+        |   |
+            |
+            |
+            |
+            |
+      ========='''
+      HEREDOC
+    end
+
 end
