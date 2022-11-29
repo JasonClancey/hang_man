@@ -20,7 +20,7 @@ module Display
             |
             |
             |
-      ========='''
+      ============
       HEREDOC
     end
 
