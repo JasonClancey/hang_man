@@ -24,11 +24,11 @@ class Words
         request_player_guess
         @guessed_letter = gets.chomp.upcase
             while active
-                unless /[A-Z]/ =~ @guessed_letter && @used_letters.include?(@guessed_letter) == false && @guessed_letter.length == 1
+                if /[A-Z]/ =~ @guessed_letter && @used_letters.include?(@guessed_letter) == false && @guessed_letter.length == 1
+                    active = false
+                else
                     display_invalid_guess
                     @guessed_letter = gets.chomp.upcase
-                else
-                    active = false
                 end
             end
         @used_letters.push(@guessed_letter)
