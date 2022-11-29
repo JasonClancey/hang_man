@@ -1,12 +1,13 @@
 class Words 
 
-    attr_reader :guessed_array
+    attr_reader :guessed__word_array
     require_relative 'display'
     include Display
 
     def initialize
+        @used_letters = []
         @guessed_letter = ''
-        @guessed_array = []
+        @guessed_word_array = []
         @chosen_word_array = []
         @raw_words_array = File.readlines('google-10000-english-no-swears.txt')
     end
@@ -15,24 +16,31 @@ class Words
         words_array = []
         @raw_words_array.each { |word| if word.chomp.length >= 5 && word.chomp.length <= 12 then words_array.append(word.chomp.upcase) end }
         @chosen_word_array = words_array.sample.split('')
-        @chosen_word_array.length.times {@guessed_array.push('_')}
+        @chosen_word_array.length.times {@guessed_word_array.push('_')}
     end
 
     def guess_letter
+        active = true
         request_player_guess
         @guessed_letter = gets.chomp.upcase
-        unless /[A-Z]/ =~ @guessed_letter
-            display_invalid_guess
-            guess_letter
-        end
+            while active
+                unless /[A-Z]/ =~ @guessed_letter && @used_letters.include?(@guessed_letter) == false && @guessed_letter.length == 1
+                    display_invalid_guess
+                    @guessed_letter = gets.chomp.upcase
+                else
+                    active = false
+                end
+            end
+        @used_letters.push(@guessed_letter)
     end
 
     def check_guessed_letter
         @chosen_word_array.each_with_index do |letter, index|
             if @guessed_letter == letter
-                @guessed_array[index] = @guessed_letter
+                @guessed_word_array[index] = @guessed_letter
             end
         end
+        display_used_letters
     end
 end
 
