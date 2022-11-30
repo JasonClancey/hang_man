@@ -1,6 +1,5 @@
 class Words 
 
-
     attr_reader :chosen_word_array, :guessed_word_array, :incorrect_letters_used
 
     require_relative 'display'
@@ -37,23 +36,12 @@ class Words
         @used_letters.push(@guessed_letter)
     end
 
-    def check_guessed_letter
-        @chosen_word_array.each_with_index do |letter, index|
-            if @guessed_letter == letter
-                @guessed_word_array[index] = @guessed_letter
-            end
-        end
-        if @chosen_word_array.include?(@guessed_letter) == false
-            @incorrect_letters_used +=1
-        end
-        display_used_letters
-    end
-
     #for testing only
     def display_incorrect
         puts @incorrect_letters_used
         display_guessed_array
     end
+
 end
 
 # for puts debugging
@@ -63,5 +51,5 @@ while true
 word.guess_letter
 word.check_guessed_letter
 word.display_incorrect
-
+word.display_gallows
 end
