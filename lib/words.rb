@@ -1,6 +1,6 @@
 class Words 
 
-    attr_reader :chosen_word_array, :guessed_word_array, :incorrect_letters_used
+    attr_reader :chosen_word_array, :guessed_word_array, :incorrect_letters_used, :guessed_letter, :used_letters
 
     require_relative 'display'
     include Display
@@ -11,7 +11,6 @@ class Words
         @guessed_word_array = []
         @chosen_word_array = []
         @raw_words_array = File.readlines('google-10000-english-no-swears.txt')
-        @incorrect_letters_used = 0
     end
 
     def choose_word
@@ -19,6 +18,7 @@ class Words
         @raw_words_array.each { |word| if word.chomp.length >= 5 && word.chomp.length <= 12 then words_array.append(word.chomp.upcase) end }
         @chosen_word_array = words_array.sample.split('')
         @chosen_word_array.length.times { @guessed_word_array.push('_') }
+        @raw_words_array = []
     end
 
     def guess_letter
@@ -35,21 +35,5 @@ class Words
             end
         @used_letters.push(@guessed_letter)
     end
-
-    #for testing only
-    def display_incorrect
-        puts @incorrect_letters_used
-        display_guessed_array
-    end
-
 end
 
-# for puts debugging
-word = Words.new
-word.choose_word
-while true
-word.guess_letter
-word.check_guessed_letter
-word.display_incorrect
-word.display_gallows
-end
