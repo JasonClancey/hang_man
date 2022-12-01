@@ -92,7 +92,7 @@ class Game
             guess_letter
             check_guessed_letter
             check_if_winner_loser
-            if @incorrect_guesses < 6
+            if @incorrect_guesses < 6 && @game_over == false
                 display_gallows
                 display_guessed_array
             end
@@ -143,12 +143,12 @@ class Game
 
     def from_json(save_file)
         variables = JSON.parse(File.read(save_file))
-        @head = variables['head'],
-        @body = variables['body'],
-        @left_arm = variables['left_arm'],
-        @right_arm = variables['right_arm'],
-        @left_leg = variables['left_leg'],
-        @right_leg = variables['right_leg'],
+        @head = variables['head']
+        @body = variables['body']
+        @left_arm = variables['left_arm']
+        @right_arm = variables['right_arm']
+        @left_leg = variables['left_leg']
+        @right_leg = variables['right_leg']
         @incorrect_guesses = variables['incorrect_guesses']
         @words = Words.new(
             variables['used_letters'],
