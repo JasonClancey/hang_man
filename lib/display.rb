@@ -2,16 +2,20 @@ module Display
 
     def display_instructions
         puts <<~HEREDOC
+        
+        --------------------------------------------------------------------------
         Welcome to hangman. This is a simple game where a word is chosen randomly.
         You must guess the word by entering letters when prompted.
         You have 6 incorrect guesses until the hanged man is fully drawn.
         Once the hanged man is fully draw, you lose.
         If you guess the word with less than 6 incorrect guess you win!
+        --------------------------------------------------------------------------
+        
         HEREDOC
     end
 
-    def request_player_guess
-        puts 'Please enter a letter: '
+    def display_request_guess_or_save
+        puts "Please enter a letter or type 'save' to save your game:"
     end
 
     def display_used_letters
@@ -62,5 +66,9 @@ module Display
 
     def display_thanks
         puts 'Thanks for playing!'
+    end
+
+    def display_load_game?
+        puts "Would you like to load your saved game? Y/N"
     end
 end
